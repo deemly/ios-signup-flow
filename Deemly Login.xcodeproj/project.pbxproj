@@ -12,6 +12,8 @@
 		BE97EDC81FD7DF3F0098DBA1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE97EDC61FD7DF3F0098DBA1 /* Main.storyboard */; };
 		BE97EDCA1FD7DF3F0098DBA1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE97EDC91FD7DF3F0098DBA1 /* Assets.xcassets */; };
 		BE97EDCD1FD7DF3F0098DBA1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE97EDCB1FD7DF3F0098DBA1 /* LaunchScreen.storyboard */; };
+		BE97EDD51FD7E6E40098DBA1 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE97EDD41FD7E6E40098DBA1 /* WebViewController.swift */; };
+		BE97EDD71FD7E7900098DBA1 /* signup.html in Resources */ = {isa = PBXBuildFile; fileRef = BE97EDD61FD7E7900098DBA1 /* signup.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		BE97EDC91FD7DF3F0098DBA1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BE97EDCC1FD7DF3F0098DBA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BE97EDCE1FD7DF3F0098DBA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BE97EDD41FD7E6E40098DBA1 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		BE97EDD61FD7E7900098DBA1 /* signup.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = signup.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,8 +60,10 @@
 			children = (
 				BE97EDC21FD7DF3F0098DBA1 /* AppDelegate.swift */,
 				BE97EDC41FD7DF3F0098DBA1 /* ViewController.swift */,
-				BE97EDC61FD7DF3F0098DBA1 /* Main.storyboard */,
+				BE97EDD41FD7E6E40098DBA1 /* WebViewController.swift */,
 				BE97EDC91FD7DF3F0098DBA1 /* Assets.xcassets */,
+				BE97EDD61FD7E7900098DBA1 /* signup.html */,
+				BE97EDC61FD7DF3F0098DBA1 /* Main.storyboard */,
 				BE97EDCB1FD7DF3F0098DBA1 /* LaunchScreen.storyboard */,
 				BE97EDCE1FD7DF3F0098DBA1 /* Info.plist */,
 			);
@@ -123,6 +129,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE97EDD71FD7E7900098DBA1 /* signup.html in Resources */,
 				BE97EDCD1FD7DF3F0098DBA1 /* LaunchScreen.storyboard in Resources */,
 				BE97EDCA1FD7DF3F0098DBA1 /* Assets.xcassets in Resources */,
 				BE97EDC81FD7DF3F0098DBA1 /* Main.storyboard in Resources */,
@@ -137,6 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE97EDC51FD7DF3F0098DBA1 /* ViewController.swift in Sources */,
+				BE97EDD51FD7E6E40098DBA1 /* WebViewController.swift in Sources */,
 				BE97EDC31FD7DF3F0098DBA1 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -278,10 +286,10 @@
 				DEVELOPMENT_TEAM = 4U9NSKBV63;
 				INFOPLIST_FILE = "Deemly Login/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "co.deemly.login-example.Deemly-Login";
+				PRODUCT_BUNDLE_IDENTIFIER = "co.deemly.sign-up-example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -293,10 +301,10 @@
 				DEVELOPMENT_TEAM = 4U9NSKBV63;
 				INFOPLIST_FILE = "Deemly Login/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "co.deemly.login-example.Deemly-Login";
+				PRODUCT_BUNDLE_IDENTIFIER = "co.deemly.sign-up-example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
