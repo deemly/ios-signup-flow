@@ -68,6 +68,12 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         present(alert, animated: true, completion: nil)
     }
     
+    func isGoogleAuth(url: URL) -> Bool {
+        let googleHost = (url.host ?? "").contains("google.com")
+        let oAuthPath = url.path.contains("oauth")
+        return googleHost && oAuthPath
+    }
+    
     // MARK: WKNavigationDelegate
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
@@ -87,6 +93,16 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         // and more precise checks might be needed
         if navigationAction.request.url?.host == redirectUrl.host {
             flowCompleted()
+        }
+        
+        // Google does not allow WebView OAuth and we jump out to external browser that will
+        // bring back result when done
+        if let url = navigationAction.request.url {
+            if isGoogleAuth(url: url) {
+                UIApplication.shared.open(url)
+                decisionHandler(.cancel)
+                return
+            }
         }
         
         decisionHandler(.allow)
