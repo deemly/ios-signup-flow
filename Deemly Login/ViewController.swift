@@ -24,6 +24,22 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let nameValid = (nameField.text ?? "").count > 0
         signUpButton.isEnabled = emailValid && nameValid
     }
+    
+    func showMessage(_ message: String) {
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: nil))
+            
+        present(alert, animated: true, completion: nil)
+    }
+    
+    @IBAction func signUpTapped(_ sender: Any) {
+        signUpButton.isEnabled = false
+        Deemly.OpenSignUpFlow(email: emailField.text ?? "", fullName: nameField.text ?? "",
+                              completion: {
+            self.signUpButton.isEnabled = true
+            self.showMessage(NSLocalizedString("Sign-Up flow completed!", comment: ""))
+        })
+    }
 
     // MARK: UITextFieldDelegate
     
@@ -31,7 +47,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // refresh button state in next run-loop when text contains changed values
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
             self.refreshButton()
-            
         }
 
         return true
@@ -45,14 +60,5 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
         
         return true
-    }
-
-    // MARK: -
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destination = segue.destination as? WebViewController {
-            destination.email = (emailField.text ?? "").trimmingCharacters(in: .whitespaces)
-            destination.name = (nameField.text ?? "").trimmingCharacters(in: .whitespaces)
-        }
     }
 }
