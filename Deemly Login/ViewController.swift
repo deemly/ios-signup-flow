@@ -35,7 +35,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBAction func signUpTapped(_ sender: Any) {
         signUpButton.isEnabled = false
         Deemly.OpenSignUpFlow(email: emailField.text ?? "", fullName: nameField.text ?? "",
-                              completion: {
+                              presenter: self, completion: {
             self.signUpButton.isEnabled = true
             self.showMessage(NSLocalizedString("Sign-Up flow completed!", comment: ""))
         })

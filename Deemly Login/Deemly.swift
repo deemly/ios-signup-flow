@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class Deemly {
     private static var signUpCompletion = {}
@@ -15,9 +16,11 @@ class Deemly {
     private static var schemeHandlingVerified = false
     
     // start sign-up flow in external browser, returning whether it was possible to
-    // open a https:// URL. You need to
+    // open a https:// URL. If you pass in a non-nil presenter a embedded SFSafariViewController
+    // is used to handle the sign-up flow otherwise the app jumps to Safari.
     @discardableResult static public func OpenSignUpFlow(email: String, fullName: String,
-                                      completion: @escaping (() -> ())) -> Bool {
+                                                         presenter: UIViewController?,
+                                                         completion: @escaping (() -> ())) -> Bool {
         // if we are getting crashes here, it is because the Info.plist is missing required configuration
         let returnUrl = try! INFO_PLIST_NOT_PROPERLY_CONFIGURED_FOR_DEEMLY()
         let escapedReturn = returnUrl.absoluteString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
@@ -29,10 +32,23 @@ class Deemly {
         let urlString = "https://trust.deemly.co/joindeemly?email=\(escapedEmail)&name=\(escapedName)&returnUrl=\(escapedReturn)&profileId="
         let url = URL(string: urlString)!
 
-        signUpCompletion = completion
-        
-        // we use the deprecated call to allow using this Helper class on old versions of iOS
-        return UIApplication.shared.openURL(url)
+        if let vc = presenter {
+            let safari = SFSafariViewController(url: url)
+            safari.delegate = safariViewControllerDelegate
+            signUpCompletion = {
+                safari.dismiss(animated: true, completion: nil)
+                completion()
+            }
+            
+            vc.present(safari, animated: true, completion: nil)
+            return true
+            
+        } else {
+            signUpCompletion = completion
+            
+            // we use the deprecated call to allow using this Helper class on old versions of iOS
+            return UIApplication.shared.openURL(url)
+        }
     }
     
     static public func open(url: URL) -> Bool {
@@ -94,4 +110,12 @@ class Deemly {
         
         throw AuthenticationConfigurationError.MissingUrlScheme(scheme: scheme)
     }
+    
+    private class SafariViewControllerDelegate : NSObject, SFSafariViewControllerDelegate {
+        func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+            Deemly.signUpCompletion()
+        }
+    }
+    
+    private static var safariViewControllerDelegate = SafariViewControllerDelegate()
 }
