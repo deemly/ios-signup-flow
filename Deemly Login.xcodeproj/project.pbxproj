@@ -17,6 +17,7 @@
 
 /* Begin PBXFileReference section */
 		BE3020652004E01A00A5CE0F /* Deemly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deemly.swift; sourceTree = "<group>"; };
+		BE3020702006402200A5CE0F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		BE97EDBF1FD7DF3F0098DBA1 /* Deemly Login.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Deemly Login.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE97EDC21FD7DF3F0098DBA1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BE97EDC41FD7DF3F0098DBA1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -40,6 +41,7 @@
 		BE97EDB61FD7DF3F0098DBA1 = {
 			isa = PBXGroup;
 			children = (
+				BE3020702006402200A5CE0F /* README.md */,
 				BE97EDC11FD7DF3F0098DBA1 /* Deemly Login */,
 				BE97EDC01FD7DF3F0098DBA1 /* Products */,
 			);
