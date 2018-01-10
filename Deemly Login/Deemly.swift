@@ -10,7 +10,7 @@ import UIKit
 import SafariServices
 
 class Deemly {
-    private static var signUpCompletion = {}
+    private static var signUpCompletion = { (deemlyId: String?) -> () in }
     
     // used to make sure AppDelegate routes deemly-<APPID> URL's into this class.
     private static var schemeHandlingVerified = false
@@ -18,9 +18,12 @@ class Deemly {
     // start sign-up flow in external browser, returning whether it was possible to
     // open a https:// URL. If you pass in a non-nil presenter a embedded SFSafariViewController
     // is used to handle the sign-up flow otherwise the app jumps to Safari.
+    //
+    // Completion handler is called with a single String parameter with the deemlyId of the signed up
+    // user or nil if sign-up was cancelled.
     @discardableResult static public func OpenSignUpFlow(email: String, fullName: String,
                                                          presenter: UIViewController?,
-                                                         completion: @escaping (() -> ())) -> Bool {
+                                                         completion: @escaping ((String?) -> ())) -> Bool {
         // if we are getting crashes here, it is because the Info.plist is missing required configuration
         let returnUrl = try! INFO_PLIST_NOT_PROPERLY_CONFIGURED_FOR_DEEMLY()
         let escapedReturn = returnUrl.absoluteString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
@@ -35,9 +38,9 @@ class Deemly {
         if let vc = presenter {
             let safari = SFSafariViewController(url: url)
             safari.delegate = safariViewControllerDelegate
-            signUpCompletion = {
+            signUpCompletion = { deemlyId in
                 safari.dismiss(animated: true, completion: nil)
-                completion()
+                completion(deemlyId)
             }
             
             vc.present(safari, animated: true, completion: nil)
@@ -60,7 +63,9 @@ class Deemly {
             return true
         }
         
-        signUpCompletion()
+        let components = URLComponents(url: url, resolvingAgainstBaseURL: false) ?? URLComponents()
+        let deemlyId = components.queryItems?.first(where: { $0.name == "deemlyId" })?.value
+        signUpCompletion(deemlyId)
         return true
     }
     
@@ -113,7 +118,7 @@ class Deemly {
     
     private class SafariViewControllerDelegate : NSObject, SFSafariViewControllerDelegate {
         func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
-            Deemly.signUpCompletion()
+            Deemly.signUpCompletion(nil)
         }
     }
     
