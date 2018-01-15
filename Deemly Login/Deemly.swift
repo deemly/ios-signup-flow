@@ -37,6 +37,9 @@ class Deemly {
 
         if let vc = presenter {
             let safari = SFSafariViewController(url: url)
+            if #available(iOS 11.0, *) {
+                safari.dismissButtonStyle = .cancel
+            }
             safari.delegate = safariViewControllerDelegate
             signUpCompletion = { deemlyId in
                 safari.dismiss(animated: true, completion: nil)
