@@ -68,7 +68,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Identity Yourself" id="dTd-UO-0Su"/>
+                    <navigationItem key="navigationItem" title="Identify Yourself" id="dTd-UO-0Su"/>
                     <connections>
                         <outlet property="emailField" destination="Bsn-bR-JNa" id="zCw-Vb-6wn"/>
                         <outlet property="nameField" destination="XkR-8s-wHY" id="UnW-db-6vC"/>
